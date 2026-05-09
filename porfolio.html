@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alejandra Ayala — People & Recruiting Operations Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F8F5F0;
+    --white: #FDFCFA;
+    --espresso: #1E1510;
+    --moss: #445740;
+    --gold: #B8873A;
+    --taupe: #8C7D6E;
+    --slate: #2E3D3A;
+    --ops-bg: #E8E2D9;
+    --ops-dark: #3B3028;
+    --people-bg: #F8F5F0;
+    --about-bg: #2E3D3A;
+    --border: rgba(30,21,16,0.1);
+    --border-light: rgba(30,21,16,0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--espresso); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  .track-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); }
+  .people-nav { background: rgba(248,245,240,0.95); }
+  .ops-nav { background: rgba(232,226,217,0.97); }
+  .nav-name { font-family: 'Lora', serif; font-size: 17px; cursor: pointer; letter-spacing: 0.01em; color: var(--espresso); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: color 0.2s; color: var(--taupe); }
+  .nav-links a:hover { color: var(--espresso); }
+  .switch-btn { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; border: 1px solid var(--border); color: var(--taupe); cursor: pointer; background: transparent; transition: all 0.2s; }
+  .switch-btn:hover { border-color: var(--espresso); color: var(--espresso); }
+
+  /* HOME SPLIT */
+  #home-page { min-height: 100vh; }
+  .home-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; align-items: center; padding: 1.25rem; background: transparent; pointer-events: none; }
+  .home-name { font-family: 'Lora', serif; font-size: 15px; color: var(--taupe); letter-spacing: 0.04em; }
+
+  .split-home { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+
+  /* OPS LEFT — warm soft sand */
+  .split-panel.ops {
+    background: var(--ops-bg);
+    border-right: 1px solid rgba(30,21,16,0.12);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 5rem;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .split-panel.ops:hover { background: #DFD8CD; }
+
+  /* PEOPLE RIGHT — cream */
+  .split-panel.people {
+    background: var(--people-bg);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 5rem;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .split-panel.people:hover { background: #F0EBE2; }
+
+  .gold-bar { position: absolute; top: 50%; right: -1px; transform: translateY(-50%); width: 2px; height: 80px; background: var(--gold); opacity: 0.5; }
+
+  .panel-eye { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .panel-title { font-family: 'Lora', serif; font-size: clamp(28px, 3vw, 46px); font-weight: 400; line-height: 1.15; margin-bottom: 1.5rem; color: var(--espresso); }
+  .panel-title em { font-style: italic; }
+  .ops .panel-title em { color: var(--ops-dark); }
+  .people .panel-title em { color: var(--moss); }
+  .panel-desc { font-size: 14px; font-weight: 300; line-height: 1.8; max-width: 320px; margin-bottom: 2rem; color: var(--taupe); }
+  .panel-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 2.5rem; }
+  .ops .panel-tag { font-size: 11px; padding: 4px 12px; border-radius: 100px; color: var(--ops-dark); border: 1px solid rgba(59,48,40,0.2); }
+  .people .panel-tag { font-size: 11px; padding: 4px 12px; border-radius: 100px; color: var(--moss); border: 1px solid rgba(68,87,64,0.25); }
+  .panel-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--espresso); transition: gap 0.2s; }
+  .split-panel:hover .panel-cta { gap: 14px; }
+  .panel-foot { position: absolute; bottom: 2rem; left: 4rem; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--taupe); }
+
+  /* TRACK PAGES */
+  .track-page { display: none; }
+  .track-page.active { display: block; }
+
+  /* HERO */
+  .track-hero { max-width: 820px; margin: 0 auto; padding: 10rem 3rem 4rem; }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.75rem; }
+  .track-hero h1 { font-family: 'Lora', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 400; line-height: 1.15; margin-bottom: 1.75rem; color: var(--espresso); }
+  .track-hero h1 em { font-style: italic; }
+  .people-page .track-hero h1 em { color: var(--moss); }
+  .ops-page .track-hero h1 em { color: var(--ops-dark); }
+  .track-hero .sub { font-size: 16px; font-weight: 300; color: var(--taupe); max-width: 520px; line-height: 1.9; margin-bottom: 2.5rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 11px; letter-spacing: 0.04em; padding: 5px 14px; border-radius: 100px; }
+  .people-page .tag { color: var(--moss); border: 1px solid rgba(68,87,64,0.25); }
+  .ops-page .tag { color: var(--ops-dark); border: 1px solid rgba(59,48,40,0.2); }
+
+  /* ORIGIN BAR */
+  .origin-wrap { max-width: 820px; margin: 0 auto; padding: 0 3rem 4rem; }
+  .origin-strip { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start; background: var(--white); }
+  .origin-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-top: 8px; flex-shrink: 0; }
+  .origin-text { font-size: 14px; font-weight: 300; color: var(--taupe); line-height: 1.7; }
+  .origin-text strong { color: var(--espresso); font-weight: 500; }
+
+  /* CASE LIST */
+  .section { max-width: 820px; margin: 0 auto; padding: 2rem 3rem 5rem; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--taupe); margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light); }
+  .case-list { display: flex; flex-direction: column; }
+  .case-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 2rem 0; border-bottom: 1px solid var(--border-light); cursor: pointer; gap: 2rem; transition: opacity 0.2s; }
+  .case-row:last-child { border-bottom: none; }
+  .case-row:hover { opacity: 0.65; }
+  .case-row.placeholder { cursor: default; }
+  .case-row.placeholder:hover { opacity: 1; }
+  .case-left { flex: 1; }
+  .case-co { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .case-title { font-family: 'Lora', serif; font-size: 19px; font-weight: 400; line-height: 1.35; margin-bottom: 0.6rem; color: var(--espresso); }
+  .placeholder .case-title { color: var(--taupe); }
+  .case-desc { font-size: 13px; font-weight: 300; color: var(--taupe); line-height: 1.7; max-width: 500px; }
+  .case-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; flex-shrink: 0; }
+  .status { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; white-space: nowrap; }
+  .status-live { background: rgba(68,87,64,0.1); color: var(--moss); }
+  .status-soon { background: rgba(140,125,110,0.1); color: var(--taupe); }
+  .arrow { font-size: 18px; color: var(--taupe); transition: transform 0.2s, color 0.2s; }
+  .case-row:not(.placeholder):hover .arrow { transform: translateX(4px); color: var(--espresso); }
+
+  /* ABOUT STRIP — deep slate green, not black */
+  .about-strip { background: var(--about-bg); padding: 5rem 3rem; }
+  .about-inner { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; }
+  .about-strip .section-label { color: rgba(248,245,240,0.3); border-bottom-color: rgba(248,245,240,0.08); }
+  .about-strip h2 { font-family: 'Lora', serif; font-size: 26px; font-weight: 400; color: var(--cream); line-height: 1.4; margin-bottom: 1.25rem; }
+  .about-strip p { font-size: 14px; font-weight: 300; color: rgba(248,245,240,0.55); line-height: 1.9; }
+  .open-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248,245,240,0.3); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(248,245,240,0.08); }
+  .open-group { margin-bottom: 1.75rem; }
+  .open-group-title { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .open-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.5rem; }
+  .open-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin-top: 10px; flex-shrink: 0; }
+  .open-item span { font-size: 13px; font-weight: 300; color: rgba(248,245,240,0.6); line-height: 1.7; }
+
+  /* FOOTER */
+  footer { max-width: 820px; margin: 0 auto; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); }
+  .footer-left { font-size: 12px; color: var(--taupe); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 12px; color: var(--taupe); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--espresso); }
+
+  /* CASE STUDY PAGES */
+  .case-page { display: none; min-height: 100vh; }
+  .case-page.active { display: block; }
+  .case-hero { max-width: 700px; margin: 0 auto; padding: 9rem 3rem 3rem; }
+  .back { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--taupe); cursor: pointer; margin-bottom: 3rem; transition: color 0.2s; }
+  .back:hover { color: var(--espresso); }
+  .case-eye { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+  .case-hero h1 { font-family: 'Lora', serif; font-size: clamp(26px, 4vw, 42px); font-weight: 400; line-height: 1.2; color: var(--espresso); margin-bottom: 1.5rem; }
+  .case-hero .lead { font-size: 17px; font-weight: 300; color: var(--taupe); line-height: 1.8; margin-bottom: 3rem; max-width: 560px; }
+
+  /* METRICS */
+  .metrics-bar { display: grid; gap: 1px; background: var(--border-light); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 4rem; }
+  .c2 { grid-template-columns: repeat(2,1fr); }
+  .c3 { grid-template-columns: repeat(3,1fr); }
+  .c4 { grid-template-columns: repeat(4,1fr); }
+  .mc { background: var(--white); padding: 1.5rem 1.25rem; text-align: center; }
+  .mn { font-family: 'Lora', serif; font-size: 32px; font-weight: 400; line-height: 1; margin-bottom: 6px; color: var(--espresso); }
+  .mn.up { color: var(--moss); }
+  .mn.dn { color: #8B3A2A; }
+  .ml { font-size: 11px; color: var(--taupe); letter-spacing: 0.02em; line-height: 1.4; }
+
+  /* CASE BODY */
+  .case-body { max-width: 640px; margin: 0 auto; padding: 0 3rem 6rem; }
+  .case-body h2 { font-family: 'Lora', serif; font-size: 22px; font-weight: 400; color: var(--espresso); margin: 3rem 0 1rem; }
+  .case-body p { font-size: 15px; font-weight: 300; color: var(--espresso); line-height: 1.9; margin-bottom: 1.25rem; }
+  .case-body ul { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+  .case-body ul li { font-size: 15px; font-weight: 300; color: var(--espresso); line-height: 1.8; padding-left: 1.25rem; position: relative; margin-bottom: 0.6rem; }
+  .case-body ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+  .pullquote { border-left: 2px solid var(--moss); padding: 0.5rem 0 0.5rem 1.5rem; margin: 2.5rem 0; font-family: 'Lora', serif; font-size: 19px; font-style: italic; color: var(--moss); line-height: 1.55; }
+
+  /* ICEE */
+  .icee-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-light); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 1.5rem 0 2rem; }
+  .icee-cell { background: var(--white); padding: 1.25rem 1.5rem; }
+  .icee-letter { font-family: 'Lora', serif; font-size: 26px; font-style: italic; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+  .icee-word { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--espresso); margin-bottom: 4px; }
+  .icee-desc { font-size: 12px; font-weight: 300; color: var(--taupe); line-height: 1.6; }
+
+  /* ESCALATION */
+  .esc-model { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 1.5rem 0 2rem; }
+  .esc-step { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1rem 1.5rem; background: var(--white); border-bottom: 1px solid var(--border-light); }
+  .esc-step:last-child { border-bottom: none; }
+  .esc-num { font-family: 'Lora', serif; font-size: 20px; font-style: italic; color: var(--gold); line-height: 1; flex-shrink: 0; width: 20px; margin-top: 2px; }
+  .esc-text { font-size: 14px; font-weight: 300; color: var(--espresso); line-height: 1.6; }
+  .esc-text strong { font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .split-home { grid-template-columns: 1fr; }
+    .split-panel { min-height: 55vh; padding: 5rem 2rem 4rem; }
+    .split-panel.ops { border-right: none; border-bottom: 1px solid var(--border); }
+    .gold-bar { display: none; }
+    .track-nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .track-hero { padding: 7rem 1.5rem 3rem; }
+    .origin-wrap { padding: 0 1.5rem 3rem; }
+    .section { padding: 2rem 1.5rem 4rem; }
+    .about-strip { padding: 3rem 1.5rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 1rem; }
+    .case-hero { padding: 7rem 1.5rem 2.5rem; }
+    .case-body { padding: 0 1.5rem 4rem; }
+    .c3 { grid-template-columns: 1fr 1fr; }
+    .c4 { grid-template-columns: 1fr 1fr; }
+    .icee-grid { grid-template-columns: 1fr; }
+    .case-row { flex-direction: column; gap: 0.5rem; }
+    .case-right { flex-direction: row; align-items: center; }
+    .panel-foot { left: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home-page">
+  <div class="home-nav"><span class="home-name">Alejandra Ayala</span></div>
+  <div class="split-home">
+
+    <!-- OPS — LEFT -->
+    <div class="split-panel ops" onclick="showTrack('ops')">
+      <div class="gold-bar"></div>
+      <p class="panel-eye">Recruiting &amp; TA Operations</p>
+      <h2 class="panel-title">The Ops<br><em>Work.</em></h2>
+      <p class="panel-desc">Global team builds, operational infrastructure, data-driven process design, executive search, and AI adoption. For TA and Recruiting Operations leaders.</p>
+      <div class="panel-tags">
+        <span class="panel-tag">Global TA operations</span>
+        <span class="panel-tag">Process design</span>
+        <span class="panel-tag">Data &amp; analytics</span>
+        <span class="panel-tag">AI adoption</span>
+      </div>
+      <span class="panel-cta">Enter this track &nbsp;→</span>
+      <span class="panel-foot">Chicago, IL</span>
+    </div>
+
+    <!-- PEOPLE — RIGHT -->
+    <div class="split-panel people" onclick="showTrack('people')">
+      <p class="panel-eye">HR &amp; Talent Development</p>
+      <h2 class="panel-title">The People<br><em>Work.</em></h2>
+      <p class="panel-desc">Culture transformation, L&amp;D program design, performance management, employee relations, and hiring philosophy. For HR and People Operations leaders.</p>
+      <div class="panel-tags">
+        <span class="panel-tag">Culture transformation</span>
+        <span class="panel-tag">L&amp;D design</span>
+        <span class="panel-tag">Performance management</span>
+        <span class="panel-tag">Employee relations</span>
+      </div>
+      <span class="panel-cta">Enter this track &nbsp;→</span>
+      <span class="panel-foot">sunnyeyes00.github.io</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- OPS TRACK -->
+<div id="ops-page" class="track-page ops-page">
+  <nav class="track-nav ops-nav">
+    <span class="nav-name" onclick="showHome()">Alejandra Ayala</span>
+    <ul class="nav-links">
+      <li><a onclick="showHome()">← Home</a></li>
+      <li><a href="#about-ops">About</a></li>
+      <li><button class="switch-btn" onclick="showTrack('people')">Switch to People Work →</button></li>
+    </ul>
+  </nav>
+
+  <section class="track-hero">
+    <p class="eyebrow">The Ops Work</p>
+    <h1>I build the operational systems that make recruiting <em>scale.</em></h1>
+    <p class="sub">A decade designing global TA infrastructure, driving process transformation, and building data-driven operations at Google, Adobe, GitLab, and The Trade Desk — across teams of up to 25 talent operations specialists worldwide.</p>
+    <div class="tags">
+      <span class="tag">Global TA operations</span>
+      <span class="tag">Process design</span>
+      <span class="tag">Data &amp; analytics</span>
+      <span class="tag">AI adoption</span>
+      <span class="tag">Change management</span>
+      <span class="tag">Vendor management</span>
+    </div>
+  </section>
+
+  <div class="origin-wrap">
+    <div class="origin-strip">
+      <div class="origin-dot"></div>
+      <p class="origin-text"><strong>Operational rigor built on a Disney foundation.</strong> My approach to systems and standards was shaped at The Walt Disney Company — where I learned that a 24-hour operation only runs smoothly when the processes are airtight and the people running them are exceptionally well-trained.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <p class="section-label">Case studies</p>
+    <div class="case-list">
+
+      <div class="case-row" onclick="showCase('offerdecline','ops')">
+        <div class="case-left">
+          <p class="case-co">GitLab &nbsp;·&nbsp; TA Operations</p>
+          <p class="case-title">From 30% to 4%: A 26-point gain in offer acceptance — in six months</p>
+          <p class="case-desc">Diagnosed a systemic offer decline problem through root cause analysis. It wasn't compensation — it was communication. Rebuilt the feedback loop between recruiters and hiring managers across 60+ countries.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row" onclick="showCase('globalteam','ops')">
+        <div class="case-left">
+          <p class="case-co">GitLab &nbsp;·&nbsp; Global Team Build</p>
+          <p class="case-title">Building a 15-person global talent operations team from zero in a fully remote environment</p>
+          <p class="case-desc">First team build from scratch across multiple countries and time zones. Established structure, norms, coordination standards, and a public-facing SOPs library still live in the GitLab Handbook today.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row" onclick="showCase('timemotion','ops')">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Process Design</p>
+          <p class="case-title">65-question time-in-motion study: turning analysis into 25 improvement projects</p>
+          <p class="case-desc">Mapped the full candidate journey across a 25-person talent operations function. Identified systemic bottlenecks and turned every finding into a professional development opportunity — reducing workload 25% and increasing productivity 35%.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row placeholder">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Operations Infrastructure</p>
+          <p class="case-title">Center of Excellence: onboarding, offboarding, and zero-disruption staffing protocols</p>
+          <p class="case-desc">Built the operational backbone of a 25-person global function — including neurodivergent-informed onboarding and a seamless offboarding process designed for zero business impact during personnel changes.</p>
+        </div>
+        <div class="case-right"><span class="status status-soon">Coming soon</span></div>
+      </div>
+
+      <div class="case-row placeholder">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Executive Search</p>
+          <p class="case-title">Executive Search redesign: from manual chaos to systemized operations in 60 days</p>
+          <p class="case-desc">Reduced confidential search classifications by 90%, standardized three competing agencies, and migrated the entire function from manual processes to a systemized candidate portal.</p>
+        </div>
+        <div class="case-right"><span class="status status-soon">Coming soon</span></div>
+      </div>
+
+      <div class="case-row placeholder">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; AI &amp; Technology</p>
+          <p class="case-title">AI tool adoption: piloting ChatGPT and Copilot inside a recruiting operations team</p>
+          <p class="case-desc">Established repeatable AI-assisted practices across the team — streamlining documentation, surfacing inefficiencies, and building a foundation for scalable AI adoption in TA operations.</p>
+        </div>
+        <div class="case-right"><span class="status status-soon">Coming soon</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="about-strip" id="about-ops">
+    <div class="about-inner">
+      <div>
+        <p class="section-label">About</p>
+        <h2>Operator. Systems builder. Change agent.</h2>
+        <p>I've spent a decade inside some of the most operationally complex recruiting environments in tech — fully remote, globally distributed, high-growth, and post-layoff. What I do is walk into functions that are broken or unbuilt and turn them into infrastructure that actually works. I lead with data, build with intention, and measure everything that matters.</p>
+      </div>
+      <div>
+        <p class="open-label">Currently open to</p>
+        <div class="open-group">
+          <p class="open-group-title">Roles</p>
+          <div class="open-item"><span class="open-dot"></span><span>Director of TA Operations</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Head of Recruiting Operations</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Senior Manager, Talent Operations</span></div>
+        </div>
+        <div class="open-group">
+          <p class="open-group-title">Environments</p>
+          <div class="open-item"><span class="open-dot"></span><span>Late-stage B2B SaaS or HR tech</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Global or distributed hiring at scale</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Remote or Chicago-based</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-left">sunnyeyes00.github.io &nbsp;·&nbsp; Chicago, IL</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/alejandra-ayala" target="_blank">LinkedIn</a>
+      <a href="https://github.com/sunnyeyes00" target="_blank">GitHub</a>
+      <a href="mailto:aayala181@gmail.com">Email</a>
+    </div>
+  </footer>
+</div>
+
+
+<!-- PEOPLE TRACK -->
+<div id="people-page" class="track-page people-page">
+  <nav class="track-nav people-nav">
+    <span class="nav-name" onclick="showHome()">Alejandra Ayala</span>
+    <ul class="nav-links">
+      <li><a onclick="showHome()">← Home</a></li>
+      <li><a href="#about-people">About</a></li>
+      <li><button class="switch-btn" onclick="showTrack('ops')">Switch to Ops Work →</button></li>
+    </ul>
+  </nav>
+
+  <section class="track-hero">
+    <p class="eyebrow">The People Work</p>
+    <h1>I build the cultures and the people that make organizations <em>perform.</em></h1>
+    <p class="sub">A decade developing talent, designing learning experiences, and transforming how teams communicate and grow — at Google, Adobe, GitLab, and The Trade Desk. Every standard I hold was forged at The Walt Disney Company.</p>
+    <div class="tags">
+      <span class="tag">Culture transformation</span>
+      <span class="tag">L&amp;D program design</span>
+      <span class="tag">Performance management</span>
+      <span class="tag">Employee relations</span>
+      <span class="tag">Facilitation</span>
+      <span class="tag">Hiring philosophy</span>
+    </div>
+  </section>
+
+  <div class="origin-wrap">
+    <div class="origin-strip">
+      <div class="origin-dot"></div>
+      <p class="origin-text"><strong>Grounded in Disney's standard of service excellence.</strong> My foundation in experience design, training, and service-first culture was built at The Walt Disney Company — where I learned that exceptional is a system, not an instinct, and that system lives in the people you develop.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <p class="section-label">Case studies</p>
+    <div class="case-list">
+
+      <div class="case-row" onclick="showCase('icee','people')">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Culture Transformation</p>
+          <p class="case-title">ICEE: Building a service-first identity from a team that felt invisible</p>
+          <p class="case-desc">Inherited an us-versus-them culture. Built ICEE — Inclusion, Courtesy, Experience, Efficiency — a shared operating standard that gave the team language for their own value and transformed their relationship to the work.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row" onclick="showCase('comms','people')">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Communication Culture</p>
+          <p class="case-title">From noise to collaboration: eliminating a cross-functional escalation culture</p>
+          <p class="case-desc">Applied a structured escalation framework from Crucial Conversations to dismantle passive-aggressive team dynamics — and replaced them with a culture where peers resolved conflict directly, without leadership in the middle.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row" onclick="showCase('pathfinders','people')">
+        <div class="case-left">
+          <p class="case-co">GitLab &nbsp;·&nbsp; L&amp;D Program Design</p>
+          <p class="case-title">Pathfinders: A six-session career development program built post-layoff with zero budget</p>
+          <p class="case-desc">After a workforce reduction left the team demoralized, built an internal upskilling program featuring VP facilitators, career mobility curriculum, and a live fishbowl interview finale serving the entire HR division across 60+ countries.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row" onclick="showCase('hiring','people')">
+        <div class="case-left">
+          <p class="case-co">GitLab &amp; The Trade Desk &nbsp;·&nbsp; Hiring Philosophy</p>
+          <p class="case-title">Hiring for attitude over aptitude: a methodology with zero bad hires across a decade</p>
+          <p class="case-desc">A repeatable interview system built around agility, transferable skills, and character over credentials — applied across multiple team builds and later facilitated company-wide at The Trade Desk through Hire Well.</p>
+        </div>
+        <div class="case-right"><span class="status status-live">Live</span><span class="arrow">→</span></div>
+      </div>
+
+      <div class="case-row placeholder">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Performance Management</p>
+          <p class="case-title">ICEE competency framework: mission, vision, and accountability standards from scratch</p>
+          <p class="case-desc">Built behavioral anchors and a full competency framework from coordinator through manager level — including a full-day workshop on self-review and peer evaluation.</p>
+        </div>
+        <div class="case-right"><span class="status status-soon">Coming soon</span></div>
+      </div>
+
+      <div class="case-row placeholder">
+        <div class="case-left">
+          <p class="case-co">The Trade Desk &nbsp;·&nbsp; Employee Relations</p>
+          <p class="case-title">Four concurrent ER cases: coaching, PIPs, and rearchitecting performance management</p>
+          <p class="case-desc">Navigated four simultaneous complex ER cases while rebuilding the team's entire approach to performance coaching and evaluation — in partnership with HRBPs using Crucial Conversations as the operating framework.</p>
+        </div>
+        <div class="case-right"><span class="status status-soon">Coming soon</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="about-strip" id="about-people">
+    <div class="about-inner">
+      <div>
+        <p class="section-label">About</p>
+        <h2>Builder. Developer of people. Raiser of standards.</h2>
+        <p>I grew up down the street from Disneyland and learned early that great experiences don't happen by accident — they happen by design, and the design lives in how you train and develop your people. I've spent the decade since applying that standard inside tech: building cultures from zero, transforming teams that weren't working, and developing talent that goes on to lead.</p>
+      </div>
+      <div>
+        <p class="open-label">Currently open to</p>
+        <div class="open-group">
+          <p class="open-group-title">Roles</p>
+          <div class="open-item"><span class="open-dot"></span><span>People Operations Director / Head of HR</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Talent Development Manager or Director</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Chief of Staff with people scope</span></div>
+        </div>
+        <div class="open-group">
+          <p class="open-group-title">Environments</p>
+          <div class="open-item"><span class="open-dot"></span><span>Mission-driven, mid-sized organizations</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Late-stage B2B SaaS or HR tech</span></div>
+          <div class="open-item"><span class="open-dot"></span><span>Remote or Chicago-based</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-left">sunnyeyes00.github.io &nbsp;·&nbsp; Chicago, IL</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/alejandra-ayala" target="_blank">LinkedIn</a>
+      <a href="https://github.com/sunnyeyes00" target="_blank">GitHub</a>
+      <a href="mailto:aayala181@gmail.com">Email</a>
+    </div>
+  </footer>
+</div>
+
+
+<!-- CASE: ICEE -->
+<div id="case-icee" class="case-page">
+  <nav class="track-nav people-nav">
+    <span class="nav-name" onclick="goBack('icee')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('icee')">← The People Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('icee')">← The People Work</span>
+    <p class="case-eye">The Trade Desk &nbsp;·&nbsp; Culture Transformation &nbsp;·&nbsp; 2024</p>
+    <h1>ICEE: Building a service-first identity from a team that felt invisible</h1>
+    <p class="lead">When people don't have language for their own value, they protect themselves with defensiveness. My job was to give them better language — and keep it alive every single day until it became who they were.</p>
+    <div class="metrics-bar c3">
+      <div class="mc"><div class="mn up">8/10</div><div class="ml">Team members transitioned or replaced within 12 months</div></div>
+      <div class="mc"><div class="mn">25</div><div class="ml">Talent operations specialists in full operational footprint</div></div>
+      <div class="mc"><div class="mn up">1</div><div class="ml">Shared operating standard built from zero</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>What I inherited</h2>
+    <p>When I arrived at The Trade Desk, the Candidate Experience team had a culture of "we're not their assistant." Recruiters, sourcers, and talent operations specialists were not working as one team. There was finger-pointing, passive aggression, and a default to escalating conflict upward rather than resolving it peer-to-peer.</p>
+    <p>When I took the time to actually listen, what I found underneath the defensiveness was simpler: they felt small. They felt like their work was invisible and their contributions went unrecognized. The attitude was a protection mechanism, not a personality flaw. You can't fix a culture with a process. You have to give people a new identity to step into.</p>
+    <h2>Building ICEE</h2>
+    <p>I created ICEE — Inclusion, Courtesy, Experience, Efficiency — as the team's operating standard. Not a policy. Not a values statement on a wall. A living language used in every conversation, every one-on-one, every coaching moment.</p>
+    <div class="icee-grid">
+      <div class="icee-cell"><div class="icee-letter">I</div><div class="icee-word">Inclusion</div><div class="icee-desc">Every candidate, recruiter, and stakeholder belongs in the experience we create.</div></div>
+      <div class="icee-cell"><div class="icee-letter">C</div><div class="icee-word">Courtesy</div><div class="icee-desc">How we treat people — in every interaction, at every level — is non-negotiable.</div></div>
+      <div class="icee-cell"><div class="icee-letter">E</div><div class="icee-word">Experience</div><div class="icee-desc">We are stewards of the candidate and employee experience, not administrators of it.</div></div>
+      <div class="icee-cell"><div class="icee-letter">E</div><div class="icee-word">Efficiency</div><div class="icee-desc">We deliver with precision. Speed and care are not in conflict.</div></div>
+    </div>
+    <p>The framework became the language of every conversation. "Tell me about the last time you were IC with a hiring manager." "How did you bring the E of Experience into that candidate interaction?" The standard stayed alive because leadership kept it in the room — not as a checkbox, but as a daily lens.</p>
+    <div class="pullquote">"Everything starts in language, and everything starts in leadership."</div>
+    <h2>What the culture shift produced</h2>
+    <p>Within twelve months, eight out of ten team members had been transitioned, promoted, or replaced. Two were promoted laterally into recruiter roles — a direct outcome of the development investment. Two were separated following performance management processes. Two self-selected out when the new standard made clear the old way of operating was no longer acceptable. Two stayed and thrived.</p>
+    <p>The churn was not failure. The churn was the culture working. When you raise the standard, the people who can't meet it leave — and the ones who remain are the ones who belong.</p>
+  </div>
+</div>
+
+<!-- CASE: COMMS -->
+<div id="case-comms" class="case-page">
+  <nav class="track-nav people-nav">
+    <span class="nav-name" onclick="goBack('comms')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('comms')">← The People Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('comms')">← The People Work</span>
+    <p class="case-eye">The Trade Desk &nbsp;·&nbsp; Communication Culture &nbsp;·&nbsp; 2024</p>
+    <h1>From noise to collaboration: eliminating a cross-functional escalation culture</h1>
+    <p class="lead">A team that had normalized passive aggression and upward tattling. The fix wasn't a policy. It was a framework — and the discipline to hold it until new behavior became the default.</p>
+    <div class="metrics-bar c2">
+      <div class="mc"><div class="mn dn">High</div><div class="ml">Volume of leadership escalations at start</div></div>
+      <div class="mc"><div class="mn up">Near zero</div><div class="ml">Cross-functional escalations after implementation</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>The situation</h2>
+    <p>Recruiters, sourcers, and talent operations specialists were not resolving conflict with each other — they were bringing it to leadership as a default. A culture of telling on each other, passive aggressive dynamics, and us-versus-them tension running in every direction. Leadership bandwidth was being consumed by noise the team should have been equipped to handle themselves.</p>
+    <p>I also recognized a communication style mismatch early. I operate directly and assertively. The tenured team members — some with three to eight years at the company — communicated in a more feelings-based, indirect style. Before I could change anything, I needed to understand the room. I secured an internal senior HR mentor who recommended Crucial Conversations, and I read it with the specific problem in mind.</p>
+    <h2>The escalation framework</h2>
+    <p>From the book I extracted a five-step model for how conflict and escalation should work — and made it a non-negotiable standard across the entire function.</p>
+    <div class="esc-model">
+      <div class="esc-step"><span class="esc-num">1</span><span class="esc-text"><strong>Incident.</strong> Something happened once. Note it. Don't escalate.</span></div>
+      <div class="esc-step"><span class="esc-num">2</span><span class="esc-text"><strong>Coincidence.</strong> It happened twice. Pay attention. Still don't escalate.</span></div>
+      <div class="esc-step"><span class="esc-num">3</span><span class="esc-text"><strong>Pattern.</strong> Three times. Now you have something real to address.</span></div>
+      <div class="esc-step"><span class="esc-num">4</span><span class="esc-text"><strong>Direct conversation.</strong> Address it with the person directly — before anyone else is involved.</span></div>
+      <div class="esc-step"><span class="esc-num">5</span><span class="esc-text"><strong>Escalation.</strong> Only now, having completed steps one through four, do you bring leadership in.</span></div>
+    </div>
+    <p>Recruiters had to complete every step before bringing me an escalation about a talent operations specialist. The sourcing manager and recruiting directors applied the same standard. Not optional. Not situational.</p>
+    <div class="pullquote">"We wanted to create a culture of: we are all one team, and we will deal with each other directly."</div>
+    <h2>What changed</h2>
+    <p>The noise stopped. People started developing their own working relationships without leadership in the middle. Recruiters and specialists who had previously been in constant conflict started collaborating effectively because they had a structure for handling friction when it arose. The escalation framework didn't just reduce noise — it forced the team to develop interpersonal skills they'd never been required to use. That is leadership development embedded in an operational standard.</p>
+  </div>
+</div>
+
+<!-- CASE: PATHFINDERS -->
+<div id="case-pathfinders" class="case-page">
+  <nav class="track-nav people-nav">
+    <span class="nav-name" onclick="goBack('pathfinders')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('pathfinders')">← The People Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('pathfinders')">← The People Work</span>
+    <p class="case-eye">GitLab &nbsp;·&nbsp; L&amp;D Program Design &nbsp;·&nbsp; 2022</p>
+    <h1>Pathfinders: A six-session career development program built post-layoff with zero budget</h1>
+    <p class="lead">After a workforce reduction left the team scared and demoralized, I built something to move toward. Not a morale initiative. A career development program with real curriculum, real facilitators, and a live finale that felt like a radio show.</p>
+    <div class="metrics-bar c4">
+      <div class="mc"><div class="mn">6</div><div class="ml">Sessions designed and produced</div></div>
+      <div class="mc"><div class="mn up">2</div><div class="ml">Promotions produced</div></div>
+      <div class="mc"><div class="mn up">1</div><div class="ml">Internal role transition</div></div>
+      <div class="mc"><div class="mn">60+</div><div class="ml">Countries served</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>The situation</h2>
+    <p>GitLab conducted a 7% workforce reduction in 2022. Sourcers were eliminated entirely, half the recruiters were gone, and the people who remained were scared and grieving. Recruiting was paused. The team had bandwidth for the first time in years — and nothing to channel it into. I had no budget. I had a demoralized team. And I had a clear belief: learning and growth are retention tools even when money isn't available.</p>
+    <h2>What I built</h2>
+    <p>I designed Pathfinders as a six-session internal career development series for levels four through six across the entire HR and People division — including contractors. Each session was facilitated by a director or VP from within the department, creating visibility for senior leaders while developing the people below them. The curriculum was designed to meet people where they were emotionally and give them something concrete to move toward:</p>
+    <ul>
+      <li>Critical thinking and the five whys</li>
+      <li>Communicating with VP and C-suite stakeholders as a coordinator or specialist</li>
+      <li>Leading without authority</li>
+      <li>Pivoting into your next career move and navigating internal mobility</li>
+      <li>A fishbowl interview featuring TA professionals who had started as specialists — showing the audience their own possible futures</li>
+      <li>A live interview with the Head of TA, open to the entire department as a drop-in</li>
+    </ul>
+    <div class="pullquote">"The last session felt like a radio show. People recognized my interviewing instincts out loud, in front of everyone."</div>
+    <h2>The results</h2>
+    <p>Pathfinders produced two promotions and one internal role transition directly attributable to skills and visibility built through the program. It served the entire HR division across 60+ countries at a moment of organizational crisis — not just my direct team. The fishbowl finale was also a personal revelation. Facilitating that live interview — holding the room, drawing out real stories, making people feel seen — was the moment I understood that this work is where I am most fully myself professionally.</p>
+  </div>
+</div>
+
+<!-- CASE: HIRING -->
+<div id="case-hiring" class="case-page">
+  <nav class="track-nav people-nav">
+    <span class="nav-name" onclick="goBack('hiring')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('hiring')">← The People Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('hiring')">← The People Work</span>
+    <p class="case-eye">GitLab &amp; The Trade Desk &nbsp;·&nbsp; Hiring Philosophy &nbsp;·&nbsp; 2021 – Present</p>
+    <h1>Hiring for attitude over aptitude: a methodology with zero bad hires across a decade</h1>
+    <p class="lead">Skills can be taught. Drive, resourcefulness, and character cannot. I built a repeatable interview system around that belief — and it has never failed.</p>
+    <div class="metrics-bar c3">
+      <div class="mc"><div class="mn up">0</div><div class="ml">Bad hires using this methodology across a full career</div></div>
+      <div class="mc"><div class="mn">15+</div><div class="ml">Hires made across GitLab and The Trade Desk</div></div>
+      <div class="mc"><div class="mn">100s</div><div class="ml">Hiring managers trained through Hire Well at TTD</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>The philosophy</h2>
+    <p>I hire for attitude over aptitude. I can teach a system, a tool, a process. I cannot teach someone to be resourceful, to show initiative when no one is watching, or to lead before they have the title. Those qualities either exist or they don't — and most interview panels are not designed to find them. My methodology is built around one question that runs underneath every other question in the interview: does this person create their own opportunities, or do they wait for them?</p>
+    <h2>How it works</h2>
+    <p>I design the entire interview panel intentionally. I select each person based on what they are uniquely positioned to assess, and I prep the full panel before a single candidate comes in on exactly what to listen for. The debrief is structured, not a conversation. Every interviewer enters it with a framework.</p>
+    <p>For career pivoters and less experienced candidates, I built a specific assessment lens — evaluating transferable skills, systems thinking, prioritization instinct, and the ability to scale and teach what they build — rather than role-specific jargon or prior experience in the exact function.</p>
+    <div class="pullquote">"I hired one person because while waiting a year for her work permit, she created an HR volunteer role at a local nonprofit from scratch. If she'll do that for free, what will she do for a great job and a great manager?"</div>
+    <h2>Hire Well at The Trade Desk</h2>
+    <p>At The Trade Desk, I was selected to facilitate Hire Well — a company-wide interviewer training program — to hiring managers and VPs across the entire organization, both in-person and globally online. I taught panel design, scorecard writing, bias elimination, and structured debrief methodology. Facilitation is a distinct skill from curriculum design — and being trusted to stand in front of VPs and change the way they hire is a different kind of validation.</p>
+    <h2>What the methodology produces</h2>
+    <p>At GitLab, I hired globally across 60+ countries for a team that grew to 15. Several of those hires were people others would have passed over — career pivoters, candidates without pedigree but with unmistakable drive. Multiple were promoted. One became the team lead after I left. I still mentor one of them today.</p>
+  </div>
+</div>
+
+<!-- CASE: OFFER DECLINE -->
+<div id="case-offerdecline" class="case-page">
+  <nav class="track-nav ops-nav">
+    <span class="nav-name" onclick="goBack('offerdecline')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('offerdecline')">← The Ops Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('offerdecline')">← The Ops Work</span>
+    <p class="case-eye">GitLab &nbsp;·&nbsp; TA Operations &nbsp;·&nbsp; 2022</p>
+    <h1>From 30% to 4%: A 26-point gain in offer acceptance — in six months</h1>
+    <p class="lead">A 30% offer decline rate is not a compensation problem. It is a signal that something is breaking between candidate expectations and what they experience in the process. I found what was breaking and rebuilt it.</p>
+    <div class="metrics-bar c3">
+      <div class="mc"><div class="mn dn">30%</div><div class="ml">Offer decline rate at start</div></div>
+      <div class="mc"><div class="mn up">4%</div><div class="ml">Offer decline rate at six months</div></div>
+      <div class="mc"><div class="mn up">+26pt</div><div class="ml">Improvement in offer acceptance rate</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>The situation</h2>
+    <p>When I inherited the Global Candidate Experience function at GitLab, one metric stood out immediately: 30% of candidates who received offers were declining them. Across a globally distributed team operating in 60+ countries, that represented an enormous investment in sourcing, interviewing, and coordination walking out the door at the finish line. The instinct in recruiting is to call this a compensation problem. I didn't assume that. I started with data.</p>
+    <h2>Root cause analysis</h2>
+    <p>I pulled decline reasons from exit surveys, recruiter debrief notes, and direct candidate feedback. What emerged was not a compensation story — it was a communication and expectation story:</p>
+    <ul>
+      <li>Candidates experienced the interview process as disconnected — each stage felt like it came from a different company</li>
+      <li>Recruiters were not consistently checking candidate intent before extending offers, leaving motivation gaps unaddressed</li>
+      <li>Time between final interview and offer was long enough for competing offers to land and close first</li>
+      <li>Hiring managers were not aligned on how to speak about compensation, growth, and culture during the process</li>
+    </ul>
+    <div class="pullquote">"The fix was operational and behavioral, not budgetary."</div>
+    <h2>What I built</h2>
+    <p>I redesigned the recruiter touchpoint cadence to include explicit intent-checking conversations at key stages. I built and delivered enablement sessions for recruiters on how to surface and address candidate hesitation before the offer stage. I worked with hiring managers to create consistent messaging frameworks around growth, culture, and compensation. I also consolidated the global TA operations playbook — giving recruiters a consistent, reliable process that became the primary enablement resource across the GitLab Handbook.</p>
+    <h2>The result</h2>
+    <p>Within six months, offer decline rate dropped from 30% to 4% — a 26-point improvement across 60+ countries. Every declined offer represents re-sourcing, re-interviewing, and re-coordinating at significant cost. But the more important outcome is what this demonstrated: recruiting operations, done well, is not administrative support. It is a strategic lever on business outcomes.</p>
+  </div>
+</div>
+
+<!-- CASE: GLOBAL TEAM -->
+<div id="case-globalteam" class="case-page">
+  <nav class="track-nav ops-nav">
+    <span class="nav-name" onclick="goBack('globalteam')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('globalteam')">← The Ops Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('globalteam')">← The Ops Work</span>
+    <p class="case-eye">GitLab &nbsp;·&nbsp; Global Team Build &nbsp;·&nbsp; 2021 – 2024</p>
+    <h1>Building a 15-person global talent operations team from zero in a fully remote environment</h1>
+    <p class="lead">No team. No structure. No precedent. Just a mandate to build the operational foundation for recruiting across 60+ countries — and the discipline to do it in public, in an open-source handbook the whole world can read.</p>
+    <div class="metrics-bar c3">
+      <div class="mc"><div class="mn">15</div><div class="ml">Team members at peak including contractors</div></div>
+      <div class="mc"><div class="mn">60+</div><div class="ml">Countries in operational footprint</div></div>
+      <div class="mc"><div class="mn up">3–4</div><div class="ml">Internal promotions produced</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>The build</h2>
+    <p>I joined GitLab as an associate manager and was promoted to manager within the role. It was the first time I had built an entire team from scratch — globally, across multiple countries and time zones, in a fully async remote-first environment where documentation is not a backup, it is the product. I hired for agility over credentials deliberately. Some of my best hires were career pivoters who demonstrated the resourcefulness and drive that no job description can specify.</p>
+    <h2>What I built publicly</h2>
+    <p>At GitLab, the handbook is the company. Every process, every standard, every operating norm lives there — publicly, in the open, where anyone in the world can read it. I wrote and maintained the global TA operations playbook in the GitLab Handbook, standardizing coordination processes and serving as the primary enablement resource for recruiting across 60+ countries. That work is still live today.</p>
+    <div class="pullquote">"It was the first time I built the whole team from scratch — and I learned that building is what I'm for."</div>
+    <h2>Development and what came next</h2>
+    <p>I promoted three to four people from within the team during my tenure. I hired people who had never held a recruiting operations role and developed them into high performers through intentional coaching, structured feedback loops, and Pathfinders — the L&D program I built for the entire HR division post-layoff. One person I developed went on to lead the team after I departed. I also navigated the team's first reduction in force alongside HR leadership, and immediately turned my attention to rebuilding morale for the people who remained.</p>
+  </div>
+</div>
+
+<!-- CASE: TIME IN MOTION -->
+<div id="case-timemotion" class="case-page">
+  <nav class="track-nav ops-nav">
+    <span class="nav-name" onclick="goBack('timemotion')">Alejandra Ayala</span>
+    <ul class="nav-links"><li><a onclick="goBack('timemotion')">← The Ops Work</a></li></ul>
+  </nav>
+  <div class="case-hero">
+    <span class="back" onclick="goBack('timemotion')">← The Ops Work</span>
+    <p class="case-eye">The Trade Desk &nbsp;·&nbsp; Process Design &nbsp;·&nbsp; 2024</p>
+    <h1>65-question time-in-motion study: turning analysis into 25 improvement projects</h1>
+    <p class="lead">Most ops leaders identify bottlenecks. I mapped every single moment of friction across the full candidate journey — then turned the findings into professional development opportunities for my team instead of just a project list for me.</p>
+    <div class="metrics-bar c3">
+      <div class="mc"><div class="mn">65</div><div class="ml">Questions in the time-in-motion study</div></div>
+      <div class="mc"><div class="mn up">25%</div><div class="ml">Reduction in coordination workload</div></div>
+      <div class="mc"><div class="mn up">35%</div><div class="ml">Increase in team productivity</div></div>
+    </div>
+  </div>
+  <div class="case-body">
+    <h2>The approach</h2>
+    <p>When I arrived at The Trade Desk, I was overseeing a function with 25 talent operations specialists across North America and global regions. Before I could improve anything, I needed to understand everything. I designed a 65-question time-in-motion study that mapped the full candidate journey end-to-end: every touchpoint, every handoff, every place where coordination was happening manually that didn't need to be, and every place where the process was creating friction for candidates, recruiters, or hiring teams.</p>
+    <h2>What made this different</h2>
+    <p>Most leaders who run a process audit produce a project list and assign it to themselves or a small workgroup. I translated the 25 findings into 25 discrete improvement projects — and delegated each one as a professional development opportunity for a team member. The analysis became the curriculum. This approach did two things simultaneously: it drove the operational outcomes the business needed, and it gave the team real, scoped ownership over meaningful work.</p>
+    <div class="pullquote">"Every bottleneck became someone's development opportunity."</div>
+    <h2>The results</h2>
+    <p>The 25 improvement projects collectively reduced coordination workload by 25% and increased overall team productivity by up to 35%. Those numbers came from a team already under significant pressure from the broader organizational context I had inherited — which makes the improvement more significant, not less. The time-in-motion methodology is now a tool I carry into every operations role. Understanding where time actually goes — not where people think it goes — is the prerequisite for building anything that works at scale.</p>
+  </div>
+</div>
+
+
+<script>
+  let currentTrack = 'ops';
+  const caseOrigins = {};
+
+  function showHome() {
+    document.getElementById('home-page').style.display = 'block';
+    document.querySelectorAll('.track-page, .case-page').forEach(p => p.classList.remove('active'));
+    window.scrollTo(0,0);
+  }
+
+  function showTrack(track) {
+    currentTrack = track;
+    document.getElementById('home-page').style.display = 'none';
+    document.querySelectorAll('.track-page, .case-page').forEach(p => p.classList.remove('active'));
+    document.getElementById(track + '-page').classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function showCase(id, track) {
+    if (track) { caseOrigins[id] = track; currentTrack = track; }
+    document.getElementById('home-page').style.display = 'none';
+    document.querySelectorAll('.track-page, .case-page').forEach(p => p.classList.remove('active'));
+    document.getElementById('case-' + id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function goBack(id) {
+    showTrack(caseOrigins[id] || currentTrack || 'ops');
+  }
+</script>
+</body>
+</html>
